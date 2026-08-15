@@ -1,0 +1,4 @@
+rootProject.name = 'PuzzleApp'
+include 'pa-front'
+include 'pa-back'
+include 'image-editor'
