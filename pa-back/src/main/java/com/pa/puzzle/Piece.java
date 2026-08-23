@@ -2,17 +2,19 @@ package com.pa.puzzle;
 
 import java.awt.Point;
 import java.awt.Shape;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class defining a single puzzle piece.
  * @author Ewelina Gren
  * @version 1.0
  */
-public class PuzzlePiece {
+public class Piece {
 
     private final int ordinal;
-    private final int[] neighbouringOrdinals;
+    private final Integer[] neighbouringOrdinals;
 
     private final Shape shape;
 
@@ -22,13 +24,13 @@ public class PuzzlePiece {
      * @param neighbouringOrdinals an array of the neighbouring piece's ordinals, cannot be {@code null}
      * @param shape shape of the piece, cannot be {@code null}
      */
-    public PuzzlePiece(int ordinal, int[] neighbouringOrdinals, Shape shape) {
+    public Piece(int ordinal, Integer[] neighbouringOrdinals, Shape shape) {
         if (shape == null) {
             throw new NullPointerException("Piece's shape cannot be null");
         }
 
-        if (neighbouringOrdinals == null) {
-            throw new NullPointerException("Array of neighbouring ordinals cannot be null");
+        if (neighbouringOrdinals == null || neighbouringOrdinals.length != 4) {
+            throw new IllegalArgumentException("The number of neighbouring pieces has to be 4. Array given was: " + Arrays.toString(neighbouringOrdinals));
         }
 
         this.ordinal = ordinal;
@@ -46,10 +48,10 @@ public class PuzzlePiece {
 
     /**
      * Returns the ordinals of the neighbouring puzzle pieces
-     * which inform about the piece's left, top, right or bottom edge.
+     * which inform about the piece's top, left, bottom, right edge.
      * @return the neighbouring piece's ordinals as an array of {@code int} type values
      */
-    public int[] getNeighbouringOrdinals() {
+    public Integer[] getNeighbouringOrdinals() {
         return neighbouringOrdinals;
     }
 
@@ -71,7 +73,7 @@ public class PuzzlePiece {
 
     @Override
     public boolean equals(Object object) {
-        return object instanceof PuzzlePiece other && ordinal == other.ordinal;
+        return object instanceof Piece other && ordinal == other.ordinal;
     }
 
     @Override
@@ -81,7 +83,7 @@ public class PuzzlePiece {
 
     @Override
     public String toString() {
-        return String.format("PuzzlePiece{ordinal=%d}", ordinal);
+        return String.format("Piece{ordinal=%d}", ordinal);
     }
 
 }
