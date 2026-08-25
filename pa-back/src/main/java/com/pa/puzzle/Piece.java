@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Class defining a single puzzle piece.
