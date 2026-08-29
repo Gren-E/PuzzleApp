@@ -124,8 +124,7 @@ public class PuzzleData {
 
     public void mergeClusters(Cluster mainCluster, Cluster clusterToBeMerged) {
         if (Objects.equals(mainCluster, clusterToBeMerged)) {
-            LOG.warn("Cannot merge a cluster with itself.");
-            return;
+            throw new IllegalArgumentException("Cannot merge a cluster with itself.");
         }
 
         for (Piece piece : clusterToBeMerged.getPieces()) {
@@ -150,6 +149,11 @@ public class PuzzleData {
 
     public boolean isFinalized(Piece piece) {
         return finalizedCluster.containsPiece(piece);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("PuzzleData{rows=%d, columns=%d}", countRows(), countColumns());
     }
 
 }

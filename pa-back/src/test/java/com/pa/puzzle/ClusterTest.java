@@ -3,6 +3,7 @@ package com.pa.puzzle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +16,7 @@ public class ClusterTest {
         Cluster cluster = new Cluster(1);
 
         Assertions.assertArrayEquals(new Piece[0], cluster.getPieces());
+        Assertions.assertFalse(cluster.containsPiece(new Piece(1, new Integer[] {null, 2, 3, 4}, new Rectangle(10, 20))));
         Assertions.assertEquals(0, cluster.countPieces());
         Assertions.assertNotNull(cluster.getConsolidatedShape());
         Assertions.assertEquals(0, cluster.getConsolidatedShape().getBounds().getWidth());
@@ -30,6 +32,7 @@ public class ClusterTest {
         cluster.addPiece(piece);
 
         Assertions.assertArrayEquals(new Piece[] {piece}, cluster.getPieces());
+        Assertions.assertTrue(cluster.containsPiece(piece));
         Assertions.assertEquals(1, cluster.countPieces());
         Assertions.assertNotNull(cluster.getConsolidatedShape());
         Assertions.assertEquals(10, cluster.getConsolidatedShape().getBounds().getWidth());
@@ -50,6 +53,19 @@ public class ClusterTest {
         Set<Cluster> clusterSet = new HashSet<>(List.of(cluster1, cluster2, cluster3));
 
         Assertions.assertEquals(2, clusterSet.size());
+    }
+
+    @Test
+    public void cornerTest() {
+        Cluster cluster = new Cluster(1);
+
+        Assertions.assertEquals(new Point(0, 0), cluster.getNWCorner());
+
+        cluster.addPiece(new Piece(1, new Integer[] {3, 4, 5, 6}, new Rectangle(10, 20, 10, 10)));
+        Assertions.assertEquals(new Point(10, 20), cluster.getNWCorner());
+
+        cluster.addPiece(new Piece(12, new Integer[] {23, 24, 25, 26}, new Rectangle(50, 10, 10, 10)));
+        Assertions.assertEquals(new Point(10, 10), cluster.getNWCorner());
     }
 
 }

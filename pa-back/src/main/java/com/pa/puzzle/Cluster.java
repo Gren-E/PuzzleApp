@@ -122,7 +122,6 @@ public class Cluster {
     @Override
     public String toString() {
         return String.format("Cluster{id=%d, pieces=%d}", id, countPieces());
-
     }
 
 }
