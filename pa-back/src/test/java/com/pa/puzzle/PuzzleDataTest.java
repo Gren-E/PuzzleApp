@@ -51,7 +51,7 @@ public class PuzzleDataTest {
         Assertions.assertEquals(2, puzzleData.countColumns());
         Assertions.assertEquals(3, puzzleData.countRows());
         Assertions.assertEquals(6, puzzleData.countPieces());
-        Assertions.assertEquals(0, puzzleData.countFinalizedPieces());
+        Assertions.assertEquals(0, puzzleData.countFinalisedPieces());
         Assertions.assertEquals(7, puzzleData.getClusters().length);
         Assertions.assertEquals(6, puzzleData.getActiveClusters().length);
         Assertions.assertArrayEquals(new Integer[]{null, null, 3, 2}, puzzleData.getPiece(1).getNeighbouringOrdinals());
@@ -95,9 +95,9 @@ public class PuzzleDataTest {
         puzzleData.setPieces(pieces);
         Cluster cluster1 = puzzleData.getParentCluster(pieces[0][0]);
 
-        puzzleData.finalize(cluster1);
-        Assertions.assertTrue(puzzleData.isFinalized(pieces[0][0]));
-        Assertions.assertEquals(1, puzzleData.countFinalizedPieces());
+        puzzleData.finalise(cluster1);
+        Assertions.assertTrue(puzzleData.isFinalised(pieces[0][0]));
+        Assertions.assertEquals(1, puzzleData.countFinalisedPieces());
         Assertions.assertNotEquals(cluster1, puzzleData.getParentCluster(pieces[0][0]));
     }
 
