@@ -11,7 +11,6 @@ public abstract class PuzzleFactory {
     public static PuzzleFactory getFactory(PieceShape shape) {
         return switch (shape) {
             case RECTANGULAR -> new QuadranglePuzzleFactory();
-            default -> throw new IllegalArgumentException("Unexpected value: " + shape);
         };
     }
 
