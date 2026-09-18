@@ -14,6 +14,13 @@ public class QuadranglePuzzleFactory extends PuzzleFactory {
 
     public static final int MINIMAL_EDGE_LENGTH = 20;
 
+    /**
+     * Splits an {@code Image} into rectangular {@code Pieces}, with a specified number of rows and columns.
+     * @param rows how many rows of {@code Pieces} should there be in the puzzle
+     * @param columns how many columns of {@code Pieces} should there be in the puzzle
+     * @param image what is the final {@code Image} of the complete puzzle
+     * @return a {@code PuzzleData} instance storing information about the puzzle {@code Pieces}
+     */
     @Override
     public PuzzleData generatePuzzle(int rows, int columns, Image image) {
         int width = image.getWidth(null);
@@ -34,6 +41,15 @@ public class QuadranglePuzzleFactory extends PuzzleFactory {
         return data;
     }
 
+    /**
+     * Divides the image dimensions into equal parts based on the number of rows and columns,
+     * in order to create a grid of {@code Points} that represent the four corners of each {@code Piece}.
+     * @param rows how many rows of {@code Pieces} should there be in the puzzle
+     * @param columns how many columns of {@code Pieces} should there be in the puzzle
+     * @param imageWidth what is the total width of the puzzle {@code Image}
+     * @param imageHeight what is the total height of the puzzle {@code Image}
+     * @return a grid of {@code Points} representing the corners of the puzzle {@code Pieces}
+     */
     protected Point[][] generatePointsOnGrid(int rows, int columns, int imageWidth, int imageHeight) {
         if (rows * MINIMAL_EDGE_LENGTH >= imageWidth) {
             throw new IllegalArgumentException(String.format("Too many rows %d for given width %d.", rows, imageWidth));
@@ -63,6 +79,11 @@ public class QuadranglePuzzleFactory extends PuzzleFactory {
         return pointsGrid;
     }
 
+    /**
+     * Generates {@code Shapes} to be assigned to the {@code Pieces} of the puzzle.
+     * @param pointsGrid a grid of {@code Points} representing the corners of all the puzzle {@code Pieces}
+     * @return a two-dimensional array of {@code Shapes} to be assigned to the puzzle {@code Pieces}
+     */
     private Shape[][] generatePieceShapes(Point[][] pointsGrid) {
         PieceShapeOutline[][] outlines = new PieceShapeOutline[pointsGrid.length - 1][pointsGrid[0].length - 1];
         setEach(outlines, (row, column) -> new PieceShapeOutline((row + column) % 2 != 1));
@@ -106,6 +127,13 @@ public class QuadranglePuzzleFactory extends PuzzleFactory {
         return shapes;
     }
 
+    /**
+     * Generates a line representing the side of the {@code Piece} that falls at the edge of the {@code Image},
+     * and therefore is not shared with any other {@code Piece}.
+     * @param start a point where the {@code Path2D} starts
+     * @param end a point where the {@code Path2D} ends
+     * @return the edge of the {@code Piece} as {@code Path2D}
+     */
     protected Path2D generateOuterEdge(Point2D start, Point2D end) {
         Path2D path = new Path2D.Double();
         path.moveTo(start.getX(), start.getY());
@@ -114,14 +142,35 @@ public class QuadranglePuzzleFactory extends PuzzleFactory {
         return path;
     }
 
+    /**
+     * Generates an edge of a puzzle {@code Piece} that's shared with another {@code Piece}.
+     * @param start a point where the {@code Path2D} starts
+     * @param end a point where the {@code Path2D} ends
+     * @return the edge of the {@code Piece} as {@code Path2D}
+     */
     protected Path2D generateInnerEdge(Point2D start, Point2D end) {
         return generateOuterEdge(start, end);
     }
 
+    /**
+     * Calculates the ordinal of a {@code Piece} based on the row and the column it belongs to.
+     * @param columns a total number of columns in the puzzle
+     * @param row the row the specific {@code Piece} belongs to
+     * @param column the column the specific {@code Piece} belongs to
+     * @return the {@code Piece's} ordinal as an int value
+     */
     protected static int getOrdinal(int columns, int row, int column) {
         return row * columns + column;
     }
 
+    /**
+     * Returns an array of ordinals of the {@code Pieces} that share an edge with the selected {@code Piece}
+     * @param rows the total number of rows in the puzzle
+     * @param columns the total number of columns in the puzzle
+     * @param row the row the selected {@code Piece} belongs to
+     * @param column the columns the selected {@code Piece} belongs to
+     * @return an array of {@code Integers} representing the ordinals of neighbouring {@code Pieces}
+     */
     protected static Integer[] getNeighbouringOrdinals(int rows, int columns, int row, int column) {
         Integer[] neighbouringOrdinals = new Integer[4];
         neighbouringOrdinals[0] = row == 0 ? null : getOrdinal(columns, row - 1, column);
