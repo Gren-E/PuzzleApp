@@ -1,0 +1,62 @@
+package com.pa.creator.factory;
+
+import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
+import java.util.Random;
+
+public class TrapezoidPuzzleFactory extends QuadranglePuzzleFactory {
+
+    private static final Random random = new Random();
+
+    @Override
+    protected Path2D generateInnerEdge(Point2D start, Point2D end) {
+        Point2D diff = new Point2D.Double(end.getX() - start.getX(), end.getY() - start.getY());
+        double startEndDistance = Math.hypot(diff.getX(), diff.getY());
+
+        if (startEndDistance == 0) {
+            throw new IllegalArgumentException("The start point cannot be the same as the end point.");
+        }
+
+        double bumpDepthRatio = generateBumpDepthRatio();
+
+        double bumpStartRatio = random.nextDouble(0.16, 0.35);
+        Point2D bumpStart = new Point2D.Double(
+                start.getX() + bumpStartRatio * diff.getX(),
+                start.getY() + bumpStartRatio * diff.getY()
+        );
+
+        double bumpMidStartRatio = random.nextDouble(0.35, 0.45);
+        Point2D bumpMidStart = new Point2D.Double(
+                start.getX() + bumpMidStartRatio * diff.getX() + bumpDepthRatio * diff.getY(),
+                start.getY() + bumpMidStartRatio * diff.getY() + bumpDepthRatio * diff.getX()
+        );
+
+        double bumpMidEndRatio = random.nextDouble(0.55, 0.65);
+        Point2D bumpMidEnd = new Point2D.Double(
+                start.getX() + bumpMidEndRatio * diff.getX() + bumpDepthRatio * diff.getY(),
+                start.getY() + bumpMidEndRatio * diff.getY() + bumpDepthRatio * diff.getX()
+        );
+
+        double bumpEndRatio = random.nextDouble(0.65, 0.84);
+        Point2D bumpEnd = new Point2D.Double(
+                start.getX() + bumpEndRatio * diff.getX(),
+                start.getY() + bumpEndRatio * diff.getY()
+        );
+
+        Path2D path = new Path2D.Double();
+        path.moveTo(start.getX(), start.getY());
+        path.lineTo(bumpStart.getX(), bumpStart.getY());
+        path.lineTo(bumpMidStart.getX(), bumpMidStart.getY());
+        path.lineTo(bumpMidEnd.getX(), bumpMidEnd.getY());
+        path.lineTo(bumpEnd.getX(), bumpEnd.getY());
+        path.lineTo(end.getX(), end.getY());
+
+        return path;
+    }
+    
+    protected double generateBumpDepthRatio() {
+        double bumpDepthRatio = random.nextDouble(0.05, 0.14);
+        return random.nextBoolean() ? bumpDepthRatio * -1 : bumpDepthRatio;
+    }
+
+}
