@@ -1,22 +1,22 @@
-package com.pa.creator.factory;
+package com.pa.creator.generator;
 
 import com.pa.creator.PieceShape;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class PuzzleFactoryTest {
+public class PuzzleGeneratorTest {
 
     @Test
     public void puzzleFactoryTest() {
         for (PieceShape shape : PieceShape.values()) {
-            Assertions.assertNotNull(PuzzleFactory.getFactory(shape));
+            Assertions.assertNotNull(PuzzleGenerator.getGenerator(shape));
         }
     }
 
     @Test
     public void setEachTest() {
         Integer[][] array = new Integer[2][3];
-        PuzzleFactory.setEach(array, Integer::sum);
+        PuzzleGenerator.setEach(array, Integer::sum);
 
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {

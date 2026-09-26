@@ -1,6 +1,6 @@
 package com.pa.creator;
 
-import com.pa.creator.factory.PuzzleFactory;
+import com.pa.creator.generator.PuzzleGenerator;
 import com.pa.puzzle.PuzzleData;
 
 import java.awt.Image;
@@ -25,7 +25,7 @@ public class GameCreator {
             throw new IllegalArgumentException(String.format("Cannot generate PuzzleData with image='%s', rows=%d, columns=%d.", image, rows, columns));
         }
 
-        PuzzleFactory factory = PuzzleFactory.getFactory(pieceShape);
+        PuzzleGenerator factory = PuzzleGenerator.getGenerator(pieceShape);
         return factory.generatePuzzle(rows, columns, image);
     }
 

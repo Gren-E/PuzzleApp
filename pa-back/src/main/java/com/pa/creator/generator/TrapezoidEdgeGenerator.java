@@ -1,15 +1,12 @@
-package com.pa.creator.factory;
+package com.pa.creator.generator;
 
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
-import java.util.Random;
 
-public class TrapezoidPuzzleFactory extends QuadranglePuzzleFactory {
-
-    private static final Random random = new Random();
+public class TrapezoidEdgeGenerator extends SingleBumpEdgeGenerator {
 
     @Override
-    protected Path2D generateInnerEdge(Point2D start, Point2D end) {
+    public Path2D generateEdge(Point2D start, Point2D end) {
         Point2D diff = new Point2D.Double(end.getX() - start.getX(), end.getY() - start.getY());
         double startEndDistance = Math.hypot(diff.getX(), diff.getY());
 
@@ -17,7 +14,7 @@ public class TrapezoidPuzzleFactory extends QuadranglePuzzleFactory {
             throw new IllegalArgumentException("The start point cannot be the same as the end point.");
         }
 
-        double bumpDepthRatio = generateBumpDepthRatio();
+        double bumpDepthRatio = generateBumpDepthRatio(0.05, 0.14);
 
         double bumpStartRatio = random.nextDouble(0.16, 0.35);
         Point2D bumpStart = new Point2D.Double(
@@ -52,11 +49,6 @@ public class TrapezoidPuzzleFactory extends QuadranglePuzzleFactory {
         path.lineTo(end.getX(), end.getY());
 
         return path;
-    }
-    
-    protected double generateBumpDepthRatio() {
-        double bumpDepthRatio = random.nextDouble(0.05, 0.14);
-        return random.nextBoolean() ? bumpDepthRatio * -1 : bumpDepthRatio;
     }
 
 }

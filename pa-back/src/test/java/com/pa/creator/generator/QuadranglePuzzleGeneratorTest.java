@@ -1,13 +1,13 @@
-package com.pa.creator.factory;
+package com.pa.creator.generator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class QuadranglePuzzleFactoryTest {
+public class QuadranglePuzzleGeneratorTest {
 
     @Test
     public void quadranglePuzzleFactoryTest() {
-        QuadranglePuzzleFactory factory = new QuadranglePuzzleFactory();
+        QuadranglePuzzleGenerator factory = new QuadranglePuzzleGenerator(new EdgeGenerator());
 
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> factory.generatePointsOnGrid(20, 20, 50, 2000));

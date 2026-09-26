@@ -1,4 +1,4 @@
-package com.pa.creator.factory;
+package com.pa.creator.generator;
 
 import com.pa.creator.PieceShape;
 import com.pa.puzzle.PuzzleData;
@@ -11,15 +11,17 @@ import java.util.function.BiFunction;
  * @author Ewelina Gren
  * @version 1.0
  */
-public abstract class PuzzleFactory {
+public abstract class PuzzleGenerator {
 
     /**
      * Returns a specific PuzzleFactory subclass associated with the {@code PieceShape} provided.
      * @param shape a {@code PieceShape} defining the style of the puzzle {@code Pieces}
      */
-    public static PuzzleFactory getFactory(PieceShape shape) {
+    public static PuzzleGenerator getGenerator(PieceShape shape) {
         return switch (shape) {
-            case RECTANGULAR -> new QuadranglePuzzleFactory();
+            case RECTANGLE -> new QuadranglePuzzleGenerator(new EdgeGenerator());
+            case TRAPEZOID -> new QuadranglePuzzleGenerator(new TrapezoidEdgeGenerator());
+            case CLASSIC -> new QuadranglePuzzleGenerator(new ClassicEdgeGenerator());
         };
     }
 

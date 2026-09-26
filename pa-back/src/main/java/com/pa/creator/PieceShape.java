@@ -1,6 +1,8 @@
 package com.pa.creator;
 
 public enum PieceShape {
-    RECTANGULAR,
+    RECTANGLE,
+    TRAPEZOID,
+    CLASSIC
     ;
 }

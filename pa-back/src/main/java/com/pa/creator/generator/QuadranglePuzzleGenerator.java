@@ -1,4 +1,4 @@
-package com.pa.creator.factory;
+package com.pa.creator.generator;
 
 import com.pa.creator.PieceShapeOutline;
 import com.pa.puzzle.Piece;
@@ -10,9 +10,15 @@ import java.awt.Shape;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 
-public class QuadranglePuzzleFactory extends PuzzleFactory {
+public class QuadranglePuzzleGenerator extends PuzzleGenerator {
 
     public static final int MINIMAL_EDGE_LENGTH = 20;
+
+    private final EdgeGenerator edgeGenerator;
+
+    public QuadranglePuzzleGenerator(EdgeGenerator generator) {
+       edgeGenerator = generator;
+    }
 
     /**
      * Splits an {@code Image} into rectangular {@code Pieces}, with a specified number of rows and columns.
@@ -135,11 +141,8 @@ public class QuadranglePuzzleFactory extends PuzzleFactory {
      * @return the edge of the {@code Piece} as {@code Path2D}
      */
     protected Path2D generateOuterEdge(Point2D start, Point2D end) {
-        Path2D path = new Path2D.Double();
-        path.moveTo(start.getX(), start.getY());
-
-        path.lineTo(end.getX(), end.getY());
-        return path;
+        EdgeGenerator generator = new EdgeGenerator();
+        return generator.generateEdge(start, end);
     }
 
     /**
@@ -149,7 +152,7 @@ public class QuadranglePuzzleFactory extends PuzzleFactory {
      * @return the edge of the {@code Piece} as {@code Path2D}
      */
     protected Path2D generateInnerEdge(Point2D start, Point2D end) {
-        return generateOuterEdge(start, end);
+        return edgeGenerator.generateEdge(start, end);
     }
 
     /**
