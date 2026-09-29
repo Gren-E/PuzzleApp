@@ -4,10 +4,22 @@ import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
+/**
+ * A {@code SingleBumpEdgeGenerator} child class associated with the CLASSIC {@code PieceShape},
+ * where the piece side is curved with a single bump of irregular shape resembling an oval.
+ * @author Ewelina Gren
+ * @version 1.0
+ */
 public class ClassicEdgeGenerator extends SingleBumpEdgeGenerator {
 
     private static final Random random = new Random();
 
+    /**
+     * Generates a curved piece edge with a single bump of irregular shape turned inward or outward.
+     * @param start a point where the edge starts
+     * @param end a point where the edge ends
+     * @return a {@code Path2D} instance representing one side of a puzzle {@code Piece}
+     */
     @Override
     public Path2D generateEdge(Point2D start, Point2D end) {
         Point2D diff = new Point2D.Double(end.getX() - start.getX(), end.getY() - start.getY());

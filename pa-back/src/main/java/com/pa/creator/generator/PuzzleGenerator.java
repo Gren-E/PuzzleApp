@@ -7,14 +7,14 @@ import java.awt.Image;
 import java.util.function.BiFunction;
 
 /**
- * A generic puzzle factory class to be extended by a specific factory for each distinct puzzle shape style.
+ * A generic puzzle generator class to be extended by a specific generator for each distinct puzzle shape style.
  * @author Ewelina Gren
  * @version 1.0
  */
 public abstract class PuzzleGenerator {
 
     /**
-     * Returns a specific PuzzleFactory subclass associated with the {@code PieceShape} provided.
+     * Returns a specific PuzzleGenerator subclass with the chosen edge type, that's associated with the {@code PieceShape} provided.
      * @param shape a {@code PieceShape} defining the style of the puzzle {@code Pieces}
      */
     public static PuzzleGenerator getGenerator(PieceShape shape) {

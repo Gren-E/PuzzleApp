@@ -3,8 +3,20 @@ package com.pa.creator.generator;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 
+/**
+ * A {@code SingleBumpEdgeGenerator} child class associated with the TRAPEZOID {@code PieceShape},
+ * where the piece side is a straight line with a single trapezoid shaped bump.
+ * @author Ewelina Gren
+ * @version 1.0
+ */
 public class TrapezoidEdgeGenerator extends SingleBumpEdgeGenerator {
 
+    /**
+     * Generates a straight piece edge with a single trapezoid bump turned inward or outward.
+     * @param start a point where the edge starts
+     * @param end a point where the edge ends
+     * @return a {@code Path2D} instance representing one side of a puzzle {@code Piece}
+     */
     @Override
     public Path2D generateEdge(Point2D start, Point2D end) {
         Point2D diff = new Point2D.Double(end.getX() - start.getX(), end.getY() - start.getY());

@@ -10,14 +10,23 @@ import java.awt.Shape;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 
+/**
+ * A puzzle generator which supports all types of piece shapes built on a right angle based grid.
+ * @author Ewelina Gren
+ * @version 1.0
+ */
 public class QuadranglePuzzleGenerator extends PuzzleGenerator {
 
     public static final int MINIMAL_EDGE_LENGTH = 20;
 
     private final EdgeGenerator edgeGenerator;
 
-    public QuadranglePuzzleGenerator(EdgeGenerator generator) {
-       edgeGenerator = generator;
+    /**
+     * Creates a new generator instance based on a specified piece edge type.
+     * @param edgeGenerator the type of piece edge that define the target {@code PieceShape}
+     */
+    public QuadranglePuzzleGenerator(EdgeGenerator edgeGenerator) {
+       this.edgeGenerator = edgeGenerator;
     }
 
     /**
