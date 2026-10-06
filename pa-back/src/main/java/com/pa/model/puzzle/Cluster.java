@@ -68,6 +68,15 @@ public class Cluster {
     }
 
     /**
+     * Checks if the {@code Cluster} contains the given {@code Piece}.
+     * @param ordinal the ordinal of the {@code Piece} to be verified
+     * @return true if the {@code Piece} was found in the {@code Cluster}, false otherwise
+     */
+    public boolean containsPiece(int ordinal) {
+        return pieces.stream().anyMatch(piece -> piece.getOrdinal() == ordinal);
+    }
+
+    /**
      * Returns the total number of {@code Pieces} in the {@code Cluster}.
      * @return the total number of {@code Pieces}
      */
