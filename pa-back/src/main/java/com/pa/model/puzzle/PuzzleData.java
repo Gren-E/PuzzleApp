@@ -229,6 +229,7 @@ public class PuzzleData {
      */
     public void removeCluster(Cluster cluster) {
         activeClusters.remove(cluster);
+        cluster.clear();
         LOG.debug("{} removed from data.", cluster);
     }
 

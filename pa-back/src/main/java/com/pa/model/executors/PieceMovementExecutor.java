@@ -60,10 +60,6 @@ public class PieceMovementExecutor {
         }
     }
 
-    public void setMergeRange(int mergeRange) {
-        this.mergeRange = mergeRange;
-    }
-
     private boolean canClusterBeFinalised(Cluster cluster) {
         Piece piece = cluster.getPieces()[0];
         Point currentPosition = puzzleData.getPiecePosition(piece.getOrdinal());
@@ -71,7 +67,8 @@ public class PieceMovementExecutor {
     }
 
     private Piece findPieceAvailableToMerge(Cluster currentCluster, Piece neighbouringPiece) {
-        int ordinal = Arrays.stream(neighbouringPiece.getNeighbouringOrdinals()).filter(currentCluster::containsPiece)
+        int ordinal = Arrays.stream(neighbouringPiece.getNeighbouringOrdinals())
+                .filter(o -> o != null && currentCluster.containsPiece(o))
                 .findFirst().orElseThrow(() -> new IllegalStateException("No pieces available for merge."));
         return puzzleData.getPiece(ordinal);
     }

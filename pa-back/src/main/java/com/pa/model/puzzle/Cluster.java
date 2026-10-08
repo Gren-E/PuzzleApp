@@ -118,6 +118,11 @@ public class Cluster {
         return neighbouringPieces.stream().filter(Objects::nonNull).mapToInt(i -> i).toArray();
     }
 
+    public void clear() {
+        pieces.clear();
+        consolidatedShape.reset();
+    }
+
     @Override
     public boolean equals(Object object) {
         return object instanceof Cluster other && id == other.id;
