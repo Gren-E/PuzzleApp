@@ -1,6 +1,6 @@
 package com.pa.model.creator.generator;
 
-import com.pa.model.creator.PieceShape;
+import com.pa.model.creator.PieceStyle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ public class PuzzleGeneratorTest {
 
     @Test
     public void puzzleFactoryTest() {
-        for (PieceShape shape : PieceShape.values()) {
+        for (PieceStyle shape : PieceStyle.values()) {
             Assertions.assertNotNull(PuzzleGenerator.getGenerator(shape));
         }
     }

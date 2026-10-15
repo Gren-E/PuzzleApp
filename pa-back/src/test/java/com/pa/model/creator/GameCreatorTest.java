@@ -14,20 +14,20 @@ public class GameCreatorTest {
         Image image = new BufferedImage(10, 10, BufferedImage.TYPE_3BYTE_BGR);
 
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> GameCreator.generatePuzzleData(null, 2, 2, PieceShape.RECTANGLE));
+                () -> GameCreator.generatePuzzleData(null, 2, 2, PieceStyle.RECTANGLE));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> GameCreator.generatePuzzleData(image, 0, 2, PieceShape.RECTANGLE));
+                () -> GameCreator.generatePuzzleData(image, 0, 2, PieceStyle.RECTANGLE));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> GameCreator.generatePuzzleData(image, 2, -2, PieceShape.RECTANGLE));
+                () -> GameCreator.generatePuzzleData(image, 2, -2, PieceStyle.RECTANGLE));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> GameCreator.generatePuzzleData(image, 1, 1, PieceShape.RECTANGLE));
+                () -> GameCreator.generatePuzzleData(image, 1, 1, PieceStyle.RECTANGLE));
     }
 
     @Test
     public void validGameCreatorTest() {
         Image image = new BufferedImage(1000, 1000, BufferedImage.TYPE_3BYTE_BGR);
 
-        PuzzleData puzzleData = GameCreator.generatePuzzleData(image, 10, 20, PieceShape.RECTANGLE);
+        PuzzleData puzzleData = GameCreator.generatePuzzleData(image, 10, 20, PieceStyle.RECTANGLE);
         Assertions.assertEquals(10, puzzleData.countRows());
         Assertions.assertEquals(20, puzzleData.countColumns());
     }

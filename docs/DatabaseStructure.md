@@ -6,7 +6,7 @@
 
 Table represents all pictures known to the application, that can be used for game creation. Source file is a relative path based on the picture catalog.
 
-| **id** | source_file | upload_date         |
+| **id** | source_file | upload_timestamp    |
 |--------|-------------|---------------------|
 | 1      | image.jpg   | 2026-10-13 14:00:34 |
 | 2      | image2.jpg  | 2026-10-15 06:30:15 |
@@ -29,10 +29,10 @@ Table lists all tags related to a specific picture, allowing the picture catalog
 
 Table represents the most common game settings templates and their exact specifications, for easier game creation.
 
-| **id** | picture_id | piece_style | rows | columns | orientation |
-|--------|------------|-------------|------|---------|-------------|
-| 1      | 1          | CLASSIC     | 10   | 14      | true        |              
-| 2      | 2          | TRAPEZOID   | 15   | 28      | false       |
+| **id** | picture_id | piece_style | rows | columns | rotation |
+|--------|------------|-------------|------|---------|----------|
+| 1      | 1          | CLASSIC     | 10   | 14      | true     |              
+| 2      | 2          | TRAPEZOID   | 15   | 28      | false    |
 
 <br>
 
@@ -40,10 +40,10 @@ Table represents the most common game settings templates and their exact specifi
 
 Table keeps track of all previously solved puzzles and current games in progress.
 
-| **id** | status      | template_id | picture_id | piece_style | rows | columns | orientation | start_timestamp     | duration_in_seconds |
-|--------|-------------|-------------|------------|-------------|------|---------|-------------|---------------------|---------------------|
-| 1      | IN_PROGRESS | 2           | 1          | CLASSIC     | 10   | 14      | true        | 2026-10-25 13:23:00 | 234455              |
-| 2      | FINISHED    | *null*      | 2          | TRAPEZOID   | 15   | 28      | false       | 2026-10-28 11:10:05 | 2345255             |
+| **id** | status      | template_id | picture_id | piece_style | rows | columns | rotation | start_timestamp     | duration_in_seconds |
+|--------|-------------|-------------|------------|-------------|------|---------|----------|---------------------|---------------------|
+| 1      | IN_PROGRESS | 2           | 1          | CLASSIC     | 10   | 14      | true     | 2026-10-25 13:23:00 | 234455              |
+| 2      | FINISHED    | *null*      | 2          | TRAPEZOID   | 15   | 28      | false    | 2026-10-28 11:10:05 | 2345255             |
 
 <br>
 

@@ -1,6 +1,6 @@
 package com.pa.model.creator;
 
-public enum PieceShape {
+public enum PieceStyle {
     RECTANGLE,
     TRAPEZOID,
     CLASSIC

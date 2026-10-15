@@ -1,6 +1,6 @@
 package com.pa.ui.creator.generator;
 
-import com.pa.model.creator.PieceShape;
+import com.pa.model.creator.PieceStyle;
 import com.pa.model.creator.generator.PuzzleGenerator;
 import com.pa.model.puzzle.Piece;
 import com.pa.model.puzzle.PuzzleData;
@@ -51,7 +51,7 @@ public class PuzzleGeneratorWindow extends JFrame {
     }
 
     private void generatePuzzle() {
-        PuzzleGenerator generator = PuzzleGenerator.getGenerator(PieceShape.CLASSIC);
+        PuzzleGenerator generator = PuzzleGenerator.getGenerator(PieceStyle.CLASSIC);
         puzzleData = generator.generatePuzzle(8, 6, ImageUtil.getBlankImage(Color.BLUE, 300, 600));
     }
 

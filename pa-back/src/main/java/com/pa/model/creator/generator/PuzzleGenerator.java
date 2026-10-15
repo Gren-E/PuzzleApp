@@ -1,6 +1,6 @@
 package com.pa.model.creator.generator;
 
-import com.pa.model.creator.PieceShape;
+import com.pa.model.creator.PieceStyle;
 import com.pa.model.puzzle.PuzzleData;
 
 import java.awt.Image;
@@ -17,7 +17,7 @@ public abstract class PuzzleGenerator {
      * Returns a specific PuzzleGenerator subclass with the chosen edge type, that's associated with the {@code PieceShape} provided.
      * @param shape a {@code PieceShape} defining the style of the puzzle {@code Pieces}
      */
-    public static PuzzleGenerator getGenerator(PieceShape shape) {
+    public static PuzzleGenerator getGenerator(PieceStyle shape) {
         return switch (shape) {
             case RECTANGLE -> new QuadranglePuzzleGenerator(new EdgeGenerator());
             case TRAPEZOID -> new QuadranglePuzzleGenerator(new TrapezoidEdgeGenerator());
