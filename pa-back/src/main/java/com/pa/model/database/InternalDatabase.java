@@ -12,6 +12,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Class used for connecting with the internal database.
+ * @author Ewelina Gren
+ * @version 1.0
+ */
 public final class InternalDatabase {
 
     private static final HikariDataSource DATA_SOURCE = createDataSource();
@@ -22,10 +27,19 @@ public final class InternalDatabase {
 
     private InternalDatabase() {}
 
+    /**
+     * Returns a connection with the internal database.
+     * @return {@code Connection} with the database
+     * @throws SQLException if Connection cannot be established
+     */
     public static Connection getConnection() throws SQLException {
         return DATA_SOURCE.getConnection();
     }
 
+    /**
+     * Creates a Hikari object that manages connections with the database.
+     * @return a Hikari data source
+     */
     private static HikariDataSource createDataSource() {
         Path root = resolveRoot();
         Path dbDir = root.resolve("db/");
@@ -45,10 +59,19 @@ public final class InternalDatabase {
         return new HikariDataSource(config);
     }
 
+    /**
+     * Returns the project root.
+     * @return the root {@code Path}
+     */
     private static Path resolveRoot() {
         return Paths.get(System.getProperty("user.dir")).toAbsolutePath().normalize();
     }
 
+    /**
+     * Loads all properties from the {@code Path}
+     * @param path a {@code Path} to the properties {@code File}
+     * @return {@code Properties}
+     */
     private static Properties loadProperties(Path path) {
         if (!Files.isRegularFile(path)) {
             throw new IllegalStateException("Cannot read the file: " + path);
@@ -64,6 +87,11 @@ public final class InternalDatabase {
         return properties;
     }
 
+    /**
+     * Loads Hikari properties from {@code Properties}
+     * @param properties all Properties
+     * @return Hikari {@code Properties}
+     */
     private static Properties extractHikariProperties(Properties properties) {
         Properties hikari = new Properties();
         for (String key : properties.stringPropertyNames()) {
@@ -75,6 +103,12 @@ public final class InternalDatabase {
         return hikari;
     }
 
+    /**
+     * Creates the database's URL that can be read by JDBC
+     * @param dbDir the database directory
+     * @param properties general {@code Properties}
+     * @return database's URL
+     */
     private static String buildJdbcUrl(Path dbDir, Properties properties) {
         String path = dbDir.resolve("internal-database").toString().replace("\\", "/");
         String options = properties.getProperty("db.h2.options", "").strip();
