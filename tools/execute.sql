@@ -1,5 +1,5 @@
 CREATE TABLE pictures(
-    picture_id                  NUMBER(9)       NOT NULL,
+    picture_id          NUMBER(9)       NOT NULL,
     source_file         VARCHAR2(256)   NOT NULL,
     upload_timestamp    TIMESTAMP       NOT NULL,
 
