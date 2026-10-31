@@ -156,7 +156,7 @@ public class GameInfo {
                 "id=" + id +
                 ", startTimestamp=" + startTimestamp +
                 ", status=" + status +
-                '}';
+                "}";
     }
 
 }

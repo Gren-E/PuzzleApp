@@ -23,15 +23,11 @@ public class FileUtil {
      * @return {@code Properties}
      */
     public static Properties loadProperties(Path path) {
-        if (!Files.isRegularFile(path)) {
-            throw new IllegalStateException("Cannot read the file: " + path);
-        }
-
         Properties properties = new Properties();
         try (InputStream in = Files.newInputStream(path)) {
             properties.load(in);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException("Cannot read the file: " + path);
         }
 
         return properties;

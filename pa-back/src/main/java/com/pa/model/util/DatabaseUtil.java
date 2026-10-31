@@ -12,18 +12,20 @@ public class DatabaseUtil {
 
     /**
      * Creates a Hikari object that manages connections with the database.
+     * @param dbRoot the root {@code Path} of the database
+     * @param dbName the name of the database
+     * @param properties properties of the application (requires {@code db.username} and {@code db.password};
+     * {@code db.h2.options} optional)
      * @return a Hikari data source
      */
-    public static HikariDataSource createDataSource() {
-        Path root = FileUtil.resolveRoot();
-        Path dbDir = root.resolve("db/");
+    public static HikariDataSource createDataSource(Path dbRoot, String dbName, Properties properties) {
+        Path dbDir = dbRoot.resolve("db/");
         try {
             Files.createDirectory(dbDir);
         } catch (IOException ignored) {}
 
-        Properties properties = FileUtil.loadProperties(root.resolve("app.properties"));
         HikariConfig config = new HikariConfig(extractHikariProperties(properties));
-        config.setJdbcUrl(buildJdbcUrl(dbDir, properties));
+        config.setJdbcUrl(buildH2JdbcUrl(dbDir, dbName, properties));
         config.setUsername(properties.getProperty("db.username"));
         config.setPassword(properties.getProperty("db.password"));
         if (config.getPoolName() == null) {
@@ -38,7 +40,7 @@ public class DatabaseUtil {
      * @param properties all Properties
      * @return Hikari {@code Properties}
      */
-    private static Properties extractHikariProperties(Properties properties) {
+    protected static Properties extractHikariProperties(Properties properties) {
         Properties hikari = new Properties();
         for (String key : properties.stringPropertyNames()) {
             if (key.startsWith("db.hikari.")) {
@@ -52,11 +54,12 @@ public class DatabaseUtil {
     /**
      * Creates the database's URL that can be read by JDBC
      * @param dbDir the database directory
+     * @param dbName the name of the database
      * @param properties general {@code Properties}
      * @return database's URL
      */
-    private static String buildJdbcUrl(Path dbDir, Properties properties) {
-        String path = dbDir.resolve("internal-database").toString().replace("\\", "/");
+    protected static String buildH2JdbcUrl(Path dbDir, String dbName, Properties properties) {
+        String path = dbDir.resolve(dbName).toString().replace("\\", "/");
         String options = properties.getProperty("db.h2.options", "").strip();
         if (!options.isEmpty() && !options.startsWith(";")) {
             options = ";" + options;

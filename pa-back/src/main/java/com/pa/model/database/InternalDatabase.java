@@ -1,10 +1,13 @@
 package com.pa.model.database;
 
 import com.pa.model.util.DatabaseUtil;
+import com.pa.model.util.FileUtil;
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Class used for connecting with the internal database.
@@ -18,7 +21,9 @@ public final class InternalDatabase {
     private final HikariDataSource dataSource;
 
     private InternalDatabase() {
-        dataSource = DatabaseUtil.createDataSource();
+        Path root = FileUtil.resolveRoot();
+        Properties properties = FileUtil.loadProperties(root.resolve("app.properties"));
+        dataSource = DatabaseUtil.createDataSource(root, "internal-database", properties);
         Runtime.getRuntime().addShutdownHook(new Thread(dataSource::close, "internal-database-shutdown"));
     }
 
