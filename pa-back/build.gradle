@@ -12,6 +12,8 @@ repositories {
 dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.17'
     implementation 'org.slf4j:slf4j-simple:2.0.17'
+    implementation 'com.h2database:h2:2.3.232'
+    implementation 'com.zaxxer:HikariCP:5.1.0'
     implementation files('../libraries/gren-utils-gui-1.0.0.jar')
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
