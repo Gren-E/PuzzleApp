@@ -45,22 +45,12 @@ public class GameTemplateSQL {
 
     public static boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM " + TABLE + " WHERE template_id = ?";
-        try(Connection connection = InternalDatabase.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            int deleted = statement.executeUpdate();
-            return deleted > 0;
-        }
+        return AbstractSQL.delete(id, sql);
     }
 
     public static int countAll() throws SQLException {
         String sql = "SELECT COUNT(*) FROM " + TABLE;
-        try(Connection connection = InternalDatabase.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet results = statement.executeQuery();
-            results.next();
-            return results.getInt(1);
-        }
+        return AbstractSQL.countAll(sql);
     }
 
     private static GameTemplate readCurrentRecord(ResultSet results) throws SQLException {

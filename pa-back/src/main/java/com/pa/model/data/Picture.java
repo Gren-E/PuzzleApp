@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Class representing a single picture in the catalog, available for puzzle creation.
  * @author Ewelina Gren
- * @version 1.0 TODO
+ * @version 1.0
  */
 public record Picture(int id, File sourceFile, LocalDateTime uploadTimestamp, Set<String> tags) {
 
