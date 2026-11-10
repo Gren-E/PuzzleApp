@@ -47,7 +47,7 @@ CREATE TABLE games(
     CONSTRAINT games_picture_id_exists FOREIGN KEY(picture_id) REFERENCES pictures(picture_id),
     CONSTRAINT games_rows_positive CHECK(rows > 0),
     CONSTRAINT games_columns_positive CHECK(columns > 0),
-    CONSTRAINT games_duration_positive CHECK(duration_in_seconds > 0)
+    CONSTRAINT games_duration_non_negative CHECK(duration_in_seconds >= 0)
 )
 
 CREATE TABLE puzzle_data(

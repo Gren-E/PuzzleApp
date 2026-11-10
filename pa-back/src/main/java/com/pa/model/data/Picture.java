@@ -2,6 +2,7 @@ package com.pa.model.data;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -10,6 +11,10 @@ import java.util.Set;
  * @version 1.0
  */
 public record Picture(int id, File sourceFile, LocalDateTime uploadTimestamp, Set<String> tags) {
+
+    public Picture(int id, File sourceFile, LocalDateTime uploadTimestamp) {
+        this(id, sourceFile, uploadTimestamp, new HashSet<>());
+    }
 
     /**
      * Adds a tag related to the picture, allowing the user to search the catalog by keyword.
