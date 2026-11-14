@@ -1,4 +1,4 @@
-package com.pa.model.puzzle;
+package com.pa.model.data.puzzle;
 
 import java.awt.Point;
 import java.awt.Shape;

@@ -1,4 +1,4 @@
-package com.pa.model.puzzle;
+package com.pa.model.data.puzzle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class PuzzleData {
      * Splits the puzzle into specified array of {@code Pieces}.
      * @param pieces an array of puzzle {@code Pieces}; the number of its rows and columns has to be consistent, otherwise an exception is thrown
      */
-    public void setPieces(Piece[][] pieces) {
+    public void initializePieces(Piece[][] pieces) {
         this.pieces = pieces;
         currentPositions.clear();
         finalisedCluster = new Cluster(-1);
@@ -253,6 +253,27 @@ public class PuzzleData {
     @Override
     public String toString() {
         return String.format("PuzzleData{rows=%d, columns=%d}", countRows(), countColumns());
+    }
+
+    protected void loadClusters(Cluster[] clusters, int rows, int columns) {
+        activeClusters.clear();
+        currentPositions.clear();
+        pieces = new Piece[rows][columns];
+
+        for (Cluster cluster : clusters) {
+            if (cluster.getId() == -1) {
+                finalisedCluster = cluster;
+            } else {
+                activeClusters.add(cluster);
+            }
+
+            for (Piece piece : cluster.getPieces()) {
+                int row = piece.getOrdinal() / columns;
+                int column = piece.getOrdinal() % columns;
+                pieces[row][column] = piece;
+                currentPositions.put(piece.getOrdinal(), piece.getNWCorner());
+            }
+        }
     }
 
 }

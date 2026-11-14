@@ -1,4 +1,4 @@
-package com.pa.model.puzzle;
+package com.pa.model.data.puzzle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +48,14 @@ public class Cluster {
         pieces.add(piece);
         consolidatedShape.add(new Area(piece.getShape()));
         LOG.info("{} added to {}.", piece, this);
+    }
+
+    /**
+     * Returns a unique cluster id.
+     * @return an {@code int} value representing the cluster's id
+     */
+    public int getId() {
+        return id;
     }
 
     /**

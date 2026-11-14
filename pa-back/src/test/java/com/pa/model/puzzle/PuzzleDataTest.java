@@ -1,5 +1,8 @@
 package com.pa.model.puzzle;
 
+import com.pa.model.data.puzzle.Cluster;
+import com.pa.model.data.puzzle.Piece;
+import com.pa.model.data.puzzle.PuzzleData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -44,7 +47,7 @@ public class PuzzleDataTest {
         Assertions.assertEquals(0, puzzleData.countColumns());
         Assertions.assertEquals(0, puzzleData.countRows());
 
-        puzzleData.setPieces(pieces);
+        puzzleData.initializePieces(pieces);
 
         Assertions.assertEquals(image, puzzleData.getImage());
         Assertions.assertArrayEquals(pieces, puzzleData.getPieces());
@@ -65,13 +68,13 @@ public class PuzzleDataTest {
         Piece[][] invalidPieces = Arrays.copyOf(pieces, 4);
         invalidPieces[3] = new Piece[] {new Piece(7, new Integer[]{5, null, null, null}, new Rectangle(0, 30, 10, 10))};
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> puzzleData.setPieces(invalidPieces));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> puzzleData.initializePieces(invalidPieces));
     }
 
     @Test
     public void piecePositionTest() {
         PuzzleData puzzleData = new PuzzleData();
-        puzzleData.setPieces(pieces);
+        puzzleData.initializePieces(pieces);
         puzzleData.setPiecePosition(1, 50, 30);
 
         Assertions.assertEquals(new Point(50, 30), puzzleData.getPiecePosition(1));
@@ -80,7 +83,7 @@ public class PuzzleDataTest {
     @Test
     public void clustersTest() {
         PuzzleData puzzleData = new PuzzleData();
-        puzzleData.setPieces(pieces);
+        puzzleData.initializePieces(pieces);
         Cluster cluster1 = puzzleData.getParentCluster(pieces[0][0]);
         Cluster cluster2 = puzzleData.getParentCluster(pieces[0][1]);
         puzzleData.mergeClusters(cluster1, cluster2);
@@ -92,7 +95,7 @@ public class PuzzleDataTest {
     @Test
     public void finalizingTest() {
         PuzzleData puzzleData = new PuzzleData();
-        puzzleData.setPieces(pieces);
+        puzzleData.initializePieces(pieces);
         Cluster cluster1 = puzzleData.getParentCluster(pieces[0][0]);
 
         puzzleData.finalise(cluster1);

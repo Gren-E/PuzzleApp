@@ -1,6 +1,6 @@
 package com.pa.model.creator;
 
-import com.pa.model.puzzle.PuzzleData;
+import com.pa.model.data.puzzle.PuzzleData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

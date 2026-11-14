@@ -1,10 +1,9 @@
 package com.pa.model.executors;
 
-import com.pa.model.puzzle.Cluster;
-import com.pa.model.puzzle.Piece;
-import com.pa.model.puzzle.PuzzleData;
+import com.pa.model.data.puzzle.Cluster;
+import com.pa.model.data.puzzle.Piece;
+import com.pa.model.data.puzzle.PuzzleData;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,7 @@ public class PieceMovementExecutorTest {
         };
 
         puzzleData = new PuzzleData();
-        puzzleData.setPieces(pieces);
+        puzzleData.initializePieces(pieces);
         puzzleData.setPiecePosition(1, 10, 10);
         puzzleData.setPiecePosition(2, 20, 20);
         puzzleData.setPiecePosition(3, 30, 30);

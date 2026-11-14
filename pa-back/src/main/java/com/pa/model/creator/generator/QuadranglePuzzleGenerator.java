@@ -1,8 +1,8 @@
 package com.pa.model.creator.generator;
 
 import com.pa.model.creator.PieceShapeOutline;
-import com.pa.model.puzzle.Piece;
-import com.pa.model.puzzle.PuzzleData;
+import com.pa.model.data.puzzle.Piece;
+import com.pa.model.data.puzzle.PuzzleData;
 
 import java.awt.Image;
 import java.awt.Point;
@@ -52,7 +52,7 @@ public class QuadranglePuzzleGenerator extends PuzzleGenerator {
 
         PuzzleData data = new PuzzleData();
         data.setImage(image);
-        data.setPieces(pieces);
+        data.initializePieces(pieces);
         return data;
     }
 

@@ -2,8 +2,8 @@ package com.pa.ui.creator.generator;
 
 import com.pa.model.creator.PieceStyle;
 import com.pa.model.creator.generator.PuzzleGenerator;
-import com.pa.model.puzzle.Piece;
-import com.pa.model.puzzle.PuzzleData;
+import com.pa.model.data.puzzle.Piece;
+import com.pa.model.data.puzzle.PuzzleData;
 import com.pa.ui.util.ImageUtil;
 
 import javax.swing.JFrame;

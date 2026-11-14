@@ -1,7 +1,7 @@
 package com.pa.model.creator;
 
 import com.pa.model.creator.generator.PuzzleGenerator;
-import com.pa.model.puzzle.PuzzleData;
+import com.pa.model.data.puzzle.PuzzleData;
 
 import java.awt.Image;
 

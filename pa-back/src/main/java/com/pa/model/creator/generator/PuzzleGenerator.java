@@ -1,7 +1,7 @@
 package com.pa.model.creator.generator;
 
 import com.pa.model.creator.PieceStyle;
-import com.pa.model.puzzle.PuzzleData;
+import com.pa.model.data.puzzle.PuzzleData;
 
 import java.awt.Image;
 import java.util.function.BiFunction;

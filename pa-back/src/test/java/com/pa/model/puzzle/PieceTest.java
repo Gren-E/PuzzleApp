@@ -1,5 +1,6 @@
 package com.pa.model.puzzle;
 
+import com.pa.model.data.puzzle.Piece;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

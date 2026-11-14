@@ -1,8 +1,8 @@
 package com.pa.model.executors;
 
-import com.pa.model.puzzle.Cluster;
-import com.pa.model.puzzle.Piece;
-import com.pa.model.puzzle.PuzzleData;
+import com.pa.model.data.puzzle.Cluster;
+import com.pa.model.data.puzzle.Piece;
+import com.pa.model.data.puzzle.PuzzleData;
 import com.pa.model.util.PositionUtil;
 
 import java.awt.Point;
